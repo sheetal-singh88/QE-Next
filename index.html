@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QE Next – Tenant Management User Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1f2328;
+    background: #ffffff;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── Left Nav ── */
+  .sidenav {
+    width: 240px;
+    min-width: 240px;
+    background: #f7f8fa;
+    border-right: 1px solid #e5e7eb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 0 32px;
+    z-index: 100;
+  }
+  .sidenav-header {
+    background: #1f2328;
+    color: #fff;
+    padding: 14px 16px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 2px solid #3b82d4;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .sidenav-header span {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: #9ca3af;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    margin-top: 2px;
+  }
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+    padding: 14px 16px 4px;
+  }
+  .nav-item {
+    display: block;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: #57606a;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+    line-height: 1.4;
+  }
+  .nav-item:hover {
+    background: #eff6ff;
+    color: #3b82d4;
+    border-left-color: #3b82d4;
+  }
+  .nav-item.active {
+    background: #eff6ff;
+    color: #3b82d4;
+    border-left-color: #3b82d4;
+    font-weight: 600;
+  }
+  .nav-item.h2-link {
+    font-weight: 600;
+    color: #1f2328;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .nav-item.h2-link:hover { color: #3b82d4; }
+  .nav-item.h3-link {
+    padding-left: 24px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1f2328;
+  }
+  .nav-item.h3-link:hover { color: #3b82d4; }
+  .nav-item.h4-link {
+    padding-left: 36px;
+    font-size: 11.5px;
+    color: #57606a;
+  }
+
+  /* ── Main Content ── */
+  .main-content {
+    margin-left: 240px;
+    flex: 1;
+    min-width: 0;
+    padding: 36px 56px 64px;
+  }
+
+  /* Header */
+  .guide-header {
+    border-bottom: 2px solid #3b82d4;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .guide-header .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #3b82d4;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
+  .guide-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2328;
+    margin-bottom: 6px;
+  }
+  .guide-header p { color: #57606a; font-size: 15px; }
+
+  /* Sections */
+  section { margin-bottom: 40px; scroll-margin-top: 24px; }
+  h2 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #1f2328;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+    scroll-margin-top: 24px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2328;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 5px;
+    margin: 28px 0 12px;
+    scroll-margin-top: 24px;
+  }
+  h4 {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #1f2328;
+    margin: 16px 0 8px;
+    scroll-margin-top: 24px;
+  }
+  p { margin-bottom: 10px; color: #1f2328; }
+
+  /* Callouts */
+  .callout {
+    border-left: 3px solid #3b82d4;
+    background: #f0f6ff;
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    margin: 12px 0;
+    font-size: 15px;
+    color: #1f2328;
+  }
+  .callout.warn {
+    border-color: #d97706;
+    background: #fffbeb;
+  }
+  .callout strong { font-weight: 600; }
+
+  /* Step rows */
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 7px;
+    gap: 8px;
+  }
+  .step-row p { margin: 0; }
+  .step-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    background: #3b82d4;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Wizard steps indicator */
+  .wizard-steps {
+    display: flex;
+    align-items: stretch;
+    margin: 14px 0 18px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+  }
+  .ws {
+    padding: 7px 18px;
+    background: #f7f8fa;
+    color: #57606a;
+    border-right: 1px solid #e5e7eb;
+    flex: 1;
+    text-align: center;
+  }
+  .ws:last-child { border-right: none; }
+  .ws.active { background: #3b82d4; color: #fff; }
+  .ws.done  { background: #f0fdf4; color: #16a34a; }
+
+  /* Tables */
+  /* Screenshots */
+  figure.screenshot { margin: 12px 0 16px; }
+  figure.screenshot img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+  }
+  figure.screenshot figcaption {
+    font-size: 12px;
+    color: #57606a;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  .table-wrap { overflow-x: auto; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  thead tr { background: #f7f8fa; }
+  th {
+    text-align: left;
+    font-weight: 600;
+    color: #57606a;
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td {
+    padding: 7px 10px;
+    border: 1px solid #e5e7eb;
+    vertical-align: top;
+    color: #1f2328;
+  }
+  tr:nth-child(even) td { background: #f7f8fa; }
+  .req { color: #16a34a; font-weight: 700; }
+
+  /* Inline code */
+  code {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 12px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: #7c5cd8;
+  }
+
+  /* RBAC permission badges */
+  .perm-crud {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+  }
+  .perm-read {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+  }
+  .perm-na {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: #f7f8fa;
+    color: #9ca3af;
+    border: 1px solid #e5e7eb;
+  }
+  .rbac-table th { text-align: center; }
+  .rbac-table th:first-child { text-align: left; }
+  .rbac-table td { text-align: center; }
+  .rbac-table td:first-child { text-align: left; font-family: "SFMono-Regular", Consolas, monospace; font-size: 12px; color: #7c5cd8; }
+  .rbac-note { font-size: 12px; color: #57606a; margin-top: 8px; margin-bottom: 0; }
+
+  /* Quick reference grid */
+  .qref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .qref-item {
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .qref-item .action { font-weight: 600; color: #1f2328; margin-bottom: 3px; }
+  .qref-item .path { color: #57606a; }
+  .qref-item .path span { color: #3b82d4; font-weight: 600; }
+
+  /* Intro one-liner block */
+  .intro-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 16px 0 20px;
+  }
+  .intro-card {
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid #3b82d4;
+    border-radius: 0 5px 5px 0;
+    padding: 12px 14px;
+  }
+  .intro-card .ic-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #3b82d4;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+  }
+  .intro-card .ic-body {
+    font-size: 14px;
+    color: #57606a;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Sub-section divider inside Getting Started */
+  .gs-module-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 32px 0 4px;
+  }
+  .gs-module-divider .gs-module-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: #1f2328;
+    color: #fff;
+    border-radius: 3px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+  .gs-module-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+
+  /* List resets */
+  ul.body-list { padding-left: 20px; margin-bottom: 10px; }
+  ul.body-list li { margin-bottom: 5px; font-size: 15px; }
+
+  /* Footer */
+  .footer {
+    margin-top: 48px;
+    padding-top: 14px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 11px;
+    color: #57606a;
+  }
+
+  /* Scrollbar for sidenav */
+  .sidenav::-webkit-scrollbar { width: 4px; }
+  .sidenav::-webkit-scrollbar-track { background: transparent; }
+  .sidenav::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     LEFT NAVIGATION SIDEBAR
+════════════════════════════════════════════ -->
+<nav class="sidenav">
+  <div class="sidenav-header">
+    QE Next
+    <span>Administration Guide &mdash; 2026</span>
+  </div>
+
+  <div class="nav-section-label">Sections</div>
+
+  <a href="#overview"          class="nav-item h2-link"> Overview</a>
+
+  <a href="#gs-tenant"         class="nav-item h2-link">1. Tenant Management</a>
+
+    <a href="#landing"           class="nav-item h4-link">1.1 Tenant Administration Landing Page</a>
+    <a href="#create"            class="nav-item h4-link">1.2 Creating a New Tenant</a>
+    <a href="#edit"              class="nav-item h4-link">1.3 Editing an Existing Tenant</a>
+    <a href="#delete"            class="nav-item h4-link">1.4 Deleting a Tenant</a>
+    <a href="#search"            class="nav-item h4-link">1.5 Searching and Filtering Tenants</a>
+    <a href="#inactive"          class="nav-item h4-link">1.6 Managing Inactive Tenants</a>
+    
+    <a href="#gs-user"           class="nav-item h3-link">User Management</a>
+
+    <a href="#gs-app"            class="nav-item h3-link">Application Management</a>
+
+  <a href="#rbac"              class="nav-item h2-link">3. Role-Based Access Control</a>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════ -->
+<div class="main-content">
+
+  <!-- ── Header ── -->
+  <div class="guide-header">
+    <div class="badge">User Guide</div>
+    <h1>QE Next</h1>
+    <p>QE Next Platform &mdash; Administration Guide &nbsp;|&nbsp; QE Next 2026 Release</p>
+  </div>
+
+  <!-- ── 1. Overview ── -->
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>QE Next is an enterprise-grade Quality Engineering solution built for teams to manage the full software testing lifecycle in one place. It operates on a multi-tenant architecture, where each tenant is an isolated workspace for a distinct organization or team.</p>
+
+    <div class="intro-block">
+      <div class="intro-card">
+        <div class="ic-title">Tenant Management</div>
+        <p class="ic-body">Spin up dedicated workspaces for every team or organization — fully isolated, subscription-ready, and admin-controlled from day one.</p>
+      </div>
+      <div class="intro-card">
+        <div class="ic-title">User Management</div>
+        <p class="ic-body">Put the right people in the right roles — onboard users instantly and keep access tightly controlled across every workspace.</p>
+      </div>
+      <div class="intro-card">
+        <div class="ic-title">Application Management</div>
+        <p class="ic-body">Bring your applications into QE Next and keep every registration, configuration, and detail organized in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GETTING STARTED
+  ════════════════════════════════════════════ -->
+  <section id="getting-started">
+    <h2>Getting Started</h2>
+
+    <!-- ─────────────────────────────────────
+         TENANT MANAGEMENT
+    ───────────────────────────────────────── -->
+    <div class="gs-module-divider"><span class="gs-module-badge">Tenant Management</span></div>
+	<p></p>
+	<p></p>
+	</p>
+    <h2 id="gs-tenant">1. Tenant Management</h2>
+    <p>Tenant Management is the administrative module that enables platform administrators to create and maintain isolated tenant workspaces. Each tenant represents a distinct organization or team with its own users, application registrations, validity, and test data.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>View Tenants</strong></td><td>Browse active and inactive tenant accounts with key metadata.</td></tr>
+          <tr><td><strong>Create Tenant</strong></td><td>Provision new tenant workspaces with a subscription expiry date and assigned owners.</td></tr>
+          <tr><td><strong>Assign Owners</strong></td><td>Link existing platform users or create new users on-the-fly as Tenant Owners.</td></tr>
+          <tr><td><strong>Edit Tenant</strong></td><td>Update subscription dates, add or remove owners, and modify tenant metadata.</td></tr>
+          <tr><td><strong>Delete Tenant</strong></td><td>Permanently decommission a tenant and all its associated data.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <strong>Role Required:</strong> Tenant Management is restricted to <strong>Super Admin</strong> only. No other role has access to this module.
+    </div>
+
+    <!-- Navigation -->
+    <h4 id="navigation">Navigating to Tenant Management</h4>
+    <div class="step-row"><span class="step-chip">1</span><p>Log in to QE Next using your credentials.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>left navigation menu</strong> icon (&#9776;) in the sidebar to expand it.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Click <strong>Tenant Management</strong> from the navigation menu.</p></div>
+    <div class="step-row"><span class="step-chip">4</span><p>The <strong>Tenant Administration</strong> landing page loads at <code>/tenant</code>.</p></div>
+<div class="callout">
+      <strong>Note:</strong> When a <strong>Super Admin</strong> user logs in, Tenant Management page is the landing page.
+    </div>
+    <!-- 1.1 Tenant Administration Landing Page -->
+    <h3 id="landing">1.1 Tenant Administration Landing Page</h3>
+    <p>The landing page lists all tenant records and provides key controls for administration.</p>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen1.png" alt="Tenant Administration landing page showing Active Tenants and Inactive Tenants tabs, search, Create Tenant button, and tenant table" />
+      <figcaption>Figure 1: Tenant Administration landing page</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>UI Element</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Active Tenants tab</strong></td><td>Default view. Displays tenants with active licenses.</td></tr>
+          <tr><td><strong>Inactive Tenants tab</strong></td><td>Displays tenants whose subscriptions have expired or been decommissioned.</td></tr>
+          <tr><td><strong>Search bar (&#128269;)</strong></td><td>Text input with magnifier icon. Filters the tenant list by name in real time.</td></tr>
+          <tr><td><strong>Create Tenant + button</strong></td><td>Opens the two-step Create Tenant wizard dialog.</td></tr>
+          <tr><td><strong>Actions menu (&#8942;)</strong></td><td>Per-row context menu offering <strong>Edit</strong> and <strong>Delete</strong> for each tenant.</td></tr>
+          <tr><td><strong>Pagination controls</strong></td><td>Items-per-page selector, page indicator, item count display, Previous/Next navigation arrows.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 id="landing-switching">Switching Views</h4>
+    <p>Click the <strong>Active Tenants</strong> tab to view current subscriptions. Click <strong>Inactive Tenants</strong> to view expired or suspended accounts. Search operates within the currently selected tab only.</p>
+
+    <!-- Creating a Tenant -->
+    <h3 id="create">1.2 Creating a New Tenant</h3>
+    <p>Creating a tenant follows below steps:</p>
+    <h4 id="create-dialog">Opening the Create Tenant Dialog</h4>
+    <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>Tenant Administration</strong> landing page.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click <strong>"Create Tenant +"</strong> in the top-right area of the page.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>The <strong>Create Tenant</strong> dialog opens on the <strong>General</strong> tab.</p></div>
+<figure class="screenshot">
+      <img src="Screenshots/Screen2.png" alt="Create Tenant Page" />
+      <figcaption>Figure 2: Create Tenant page</figcaption>
+    </figure>
+    <h4 id="create-general">General Details Step</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Field</th><th>Required</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Tenant Name</strong></td>
+            <td><span class="req">&#10003; Yes</span></td>
+            <td>Unique name for the tenant organization. Allowed characters: letters, numbers, spaces, hyphens (<code>-</code>), and underscores (<code>_</code>).</td>
+          </tr>
+          <tr>
+            <td><strong>Active Till</strong></td>
+            <td><span class="req">&#10003; Yes</span></td>
+            <td>Subscription expiry date. Click the field to open a calendar picker and select the desired date.</td>
+          </tr>
+          <tr>
+            <td><strong>Tenant Owners</strong></td>
+            <td><span class="req">&#10003; Yes</span></td>
+            <td>At least one owner must be assigned before proceeding. See <a href="#owners">Assigning Owners</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Click <strong>"Next"</strong> to validate fields and advance to License Activation. Incomplete or invalid fields trigger inline validation errors and prevent navigation.</p>
+
+    <!-- Assigning Owners -->
+    <h3 id="owners">Assigning Tenant Owners</h3>
+    <p>A <strong>Tenant Owner</strong> manages the tenant workspace. At least one owner must be assigned before a tenant can be created.</p>
+
+    <h4 id="owners-existing">Adding an Existing Platform User</h4>
+	
+	   <div class="step-row"><span class="step-chip">1</span><p>In the <strong>Tenant Owners</strong> section, click <strong>"Add User +"</strong>.</p></div>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen3.png" alt="Add an Existing User" />
+      <figcaption>Figure 3: Add an Existing User</figcaption>
+    </figure>
+ 
+    <div class="step-row"><span class="step-chip">2</span><p>The <strong>Add User</strong> sub-dialog opens, listing all registered users with Username and Email columns.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Use the <strong>search bar (&#128269;)</strong> inside the dialog to filter users by name or email.</p></div>
+    <div class="step-row"><span class="step-chip">4</span><p>Select one or more users by checking the checkbox on each row. Selected users appear as chips (default: <em>"No users selected"</em>).</p></div>
+		<figure class="screenshot">
+      <img src="Screenshots/Screen4.png" alt="Add an Existing User" />
+      <figcaption>Figure 4: Selected an Existing User</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">5</span><p>Click <strong>"Add"</strong> to confirm. Selected users appear in the Tenant Owners section with a remove (&#215;) control each.</p></div>
+    <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Cancel"</strong> in the sub-dialog to discard the selection and return to the General tab.</p></div>
+    <div class="callout">
+      <strong>Tip:</strong> You can select multiple users in a single pass before clicking "Add" to assign several owners at once.
+    </div>
+
+    <!-- On-the-Fly -->
+    <h3 id="onthefly">Creating a New User as Tenant Owner</h3>
+    <p>If the desired Tenant Owner has no platform account yet, you can create one without leaving the Create Tenant dialog.</p>
+    <div class="step-row"><span class="step-chip">1</span><p>Inside the <strong>Add Tenant Owner</strong> sub-dialog, click <strong>"Create User +"</strong>.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>The <strong>Create User</strong> form appears. Fill in the required fields:</p></div>
+    <div class="table-wrap">
+	<figure class="screenshot">
+      <img src="Screenshots/Screen5.png" alt="Add an Existing User" />
+      <figcaption>Figure 4: Create a new Tenant Owner</figcaption>
+    </figure>
+      <table>
+        <thead><tr><th>Field</th><th>Required</th><th>Validation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Email</strong></td><td><span class="req">&#10003;</span></td><td>Valid email format &mdash; e.g. <code>user@domain.com</code>.</td></tr>
+          <tr><td><strong>Username</strong></td><td><span class="req">&#10003;</span></td><td>Will be autopopulate based on the email address provided</td></tr>
+          <tr><td><strong>Password</strong></td><td><span class="req">&#10003;</span></td><td>Min. 8 characters; must include uppercase, lowercase, number, and special character.</td></tr>
+          <tr><td><strong>Confirm Password</strong></td><td><span class="req">&#10003;</span></td><td>Must exactly match the Password field.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="step-row"><span class="step-chip">3</span><p>Click <strong>"Create"</strong>. The new user is saved and immediately visible in the user list within the sub-dialog.</p></div>
+    <div class="step-row"><span class="step-chip">4</span><p>Use the <strong>search bar</strong> to locate the newly created user by username.</p></div>
+    <div class="step-row"><span class="step-chip">5</span><p>Check the user's row and click <strong>"Add"</strong> to link them as a Tenant Owner.</p></div>
+    <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Cancel"</strong> on the Create form at any point to discard without saving.</p></div>
+
+    <!-- License Activation -->
+    <h4 id="license">License Activation Step (Optional)</h4>
+    <p>After completing the General step, the wizard advances to <strong>License Activation &ndash; Optional</strong>. The General step header displays a checkmark (&#10003;) confirming it is complete.</p>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen7.png" alt="Add an Existing User" />
+      <figcaption>Figure 5: License Activation (Optional)</figcaption>
+    </figure>    
+    <ul class="body-list">
+      <li>This step is <strong>not mandatory</strong>. Currently its not available so user can proceed without activating a license.</li>
+      <li>Click <strong>"Back"</strong> to return to the General tab &mdash; all previously entered data is retained.</li>
+      <li>Click <strong>"Create"</strong> to finalize tenant provisioning.</li>
+    </ul>
+    <div class="callout">
+      The dialog closes automatically and the new tenant appears in the <strong>Active Tenants</strong> list. Use the search bar to locate it by name.
+    </div>
+
+    <!-- Edit -->
+    <h3 id="edit">1.3 Editing an Existing Tenant</h3>
+    <p>Update a tenant's validity date or owners at any time.</p>
+    <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>Tenant Administration</strong> landing page.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Use the <strong>search bar</strong> to locate the tenant you want to edit.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Click the <strong>Actions (&#8942;)</strong> icon on the tenant's row.</p></div>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen8.png" alt="Add an Existing User" />
+      <figcaption>Figure 6: Search a Tenant and Click on Actions to Edit</figcaption>
+    </figure>  	
+    <div class="step-row"><span class="step-chip">4</span><p>Select <strong>"Edit"</strong>. The <strong>Edit Tenant</strong> dialog opens (same two-step structure as Create).</p></div>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen9.png" alt="Add an Existing User" />
+      <figcaption>Figure 7.1: Edit Tenant Page</figcaption>
+    </figure> 
+	
+    <div class="step-row"><span class="step-chip">5</span><p>On the <strong>General tab</strong>, make the required changes:</p></div>
+    <ul class="body-list" style="margin-left:30px;">
+      <li>Update <strong>Active Till</strong> date via the calendar picker.</li>
+      <li>Add new owners using <strong>"Add User +"</strong>.</li>
+      <li>Remove an existing owner by clicking <strong>&#215;</strong> next to their name.</li>
+    </ul>
+    <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Next"</strong> to proceed to the License Activation step.</p></div>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen10.png" alt="Add an Existing User" />
+      <figcaption>Figure 7.2: Edit Tenant Page</figcaption>
+    </figure> 
+    <div class="step-row"><span class="step-chip">7</span><p>Click <strong>"Update"</strong> to save changes. Tenant Details will be updated.</p></div>
+
+    <!-- Delete -->
+    <h3 id="delete">1.4 Deleting a Tenant</h3>
+    <div class="callout warn">
+      <strong>&#9888; Warning:</strong> Deleting a tenant is <strong>permanent and irreversible</strong>. All associated users, application , and test data will be permanently removed from the platform.
+    </div>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen11.png" alt="Add an Existing User" />
+      <figcaption>Figure 8: Search a Tenant and Click on Actions to Delete</figcaption>
+    </figure> 
+    <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>Tenant Administration</strong> landing page.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Use the <strong>search bar</strong> to locate the target tenant.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Click the <strong>Actions (&#8942;)</strong> icon on the tenant's row.</p></div>
+    <div class="step-row"><span class="step-chip">4</span><p>Select <strong>"Delete"</strong>. A confirmation dialog appears: <em>"Are you sure you want to delete [Tenant Name]?"</em></p></div>
+	<figure class="screenshot">
+      <img src="Screenshots/Screen12.png" alt="Add an Existing User" />
+      <figcaption>Figure 9: Delete Tenant Confirmation Dialog Box</figcaption>
+    </figure> 
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <thead><tr><th>Button</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Confirm Delete</strong></td><td>Permanently removes the tenant workspace, all associated users, application registrations, and test data.</td></tr>
+          <tr><td><strong>Cancel</strong></td><td>Dismisses the dialog. The tenant remains unchanged in the Active list.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Search -->
+    <h3 id="search">1.5 Searching and Filtering Tenants</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>Click the <strong>&#128269; search icon</strong> to activate the search input field.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Type a tenant name or partial name. The list filters in real time.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Clear the field to restore the full tenant list.</p></div>
+    <div class="callout">
+      <strong>Note:</strong> Search is scoped to the currently active tab (Active or Inactive). Switch tabs to search within inactive tenants.
+    </div>
+
+    <!-- Inactive Tenants -->
+    <h3 id="inactive">1.6 Managing Inactive Tenants</h3>
+    <p>A tenant becomes <strong>inactive</strong> once its <strong>Active Till</strong> date has passed. Inactive tenants are listed on the <strong>Inactive Tenants</strong> tab and work the same way as active tenants: a <strong>Super Admin</strong> can search for them, edit them, or delete them. Editing lets you extend the validity date to make a tenant active again, and you can add or remove its owners at the same time.</p>
+
+    <h4 id="inactive-view">Viewing Inactive Tenants</h4>
+    <div class="step-row"><span class="step-chip">1</span><p>Open the <strong>Tenant Administration</strong> landing page.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>Inactive Tenants</strong> tab. The tab shows the total count, for example <em>Inactive Tenants (29)</em>.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Use the <strong>&#128269; search icon</strong> to find a tenant by name, or use the pagination controls and the <strong>Items per page</strong> selector to browse the list.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen13.png" alt="Inactive Tenants tab listing expired tenants with Active Till, Created On and Actions columns" />
+      <figcaption>Figure 10: Inactive Tenants tab</figcaption>
+    </figure>
+
+    <h4 id="inactive-reactivate">Reactivating an Inactive Tenant</h4>
+    <p>To make an inactive tenant active again, extend its <strong>Active Till</strong> date.</p>
+    <div class="step-row"><span class="step-chip">1</span><p>On the <strong>Inactive Tenants</strong> tab, search for and locate the tenant.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>Actions (&#8942;)</strong> icon on the tenant's row and select <strong>"Edit"</strong>.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen14.png" alt="Actions menu on an inactive tenant row showing Edit and Delete options" />
+      <figcaption>Figure 11: Actions menu for an inactive tenant</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">3</span><p>The <strong>Edit Tenant</strong> dialog opens on the <strong>General</strong> tab. The <strong>Tenant Name</strong> is read-only. The <strong>Active Till</strong> field is empty because the previous date has expired, and the current <strong>Tenant Owners</strong> are listed below it.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen15.png" alt="Edit Tenant dialog for an inactive tenant with an empty Active Till field and one tenant owner" />
+      <figcaption>Figure 12: Edit Tenant dialog for an inactive tenant</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">4</span><p>Click the <strong>Active Till</strong> field and choose a new future date from the calendar picker. Past dates are disabled. You can also type the date in <code>mm/dd/yyyy</code> format.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen16.png" alt="Calendar picker in the Edit Tenant dialog with past dates disabled" />
+      <figcaption>Figure 13: Selecting a new Active Till date</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">5</span><p>Review the <strong>Tenant Owners</strong> list and update it if needed (see below).</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen17.png" alt="Edit Tenant dialog with a new Active Till date entered and the existing owner listed" />
+      <figcaption>Figure 14: New Active Till date entered</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Next"</strong> to go to the optional License Activation step, then click <strong>"Update"</strong> to save. The tenant moves from the <strong>Inactive Tenants</strong> tab to the <strong>Active Tenants</strong> tab.</p></div>
+
+    <h4 id="inactive-owners">Adding or Removing Tenant Owners</h4>
+    <ul class="body-list">
+      <li>To <strong>remove</strong> an owner, click <strong>Remove</strong> (trash icon) at the end of the owner's row. The list then shows <em>"No owners added yet."</em></li>
+      <li>To <strong>add</strong> an owner, use <strong>"Add User +"</strong> to select an existing user or create a new one, exactly as described in <a href="#owners">Assigning Tenant Owners</a>.</li>
+      <li>A tenant must have <strong>at least one owner</strong>. If you remove every owner and click <strong>"Next"</strong>, the dialog shows the error <em>"Validation error: Please add at least one tenant owner."</em> and does not continue.</li>
+    </ul>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen18.png" alt="Edit Tenant dialog showing a validation error asking for at least one tenant owner" />
+      <figcaption>Figure 15: Validation error when no tenant owner is assigned</figcaption>
+    </figure>
+    <div class="callout">
+      <strong>Tip:</strong> Click <strong>"Cancel"</strong> or the close (&#215;) icon to leave the dialog without saving. The tenant stays inactive and its owners are unchanged.
+    </div>
+
+    <h4 id="inactive-delete">Permanently Deleting an Inactive Tenant</h4>
+    <div class="callout warn">
+      <strong>&#9888; Warning:</strong> Deleting a tenant is <strong>permanent and irreversible</strong>. Any inactive tenant can be deleted, and all of its data is removed.
+    </div>
+    <div class="step-row"><span class="step-chip">1</span><p>On the <strong>Inactive Tenants</strong> tab, locate the tenant and click its <strong>Actions (&#8942;)</strong> icon.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Select <strong>"Delete"</strong>. A confirmation dialog appears: <em>"Are you sure you want to delete tenant "[Tenant Name]"? This action cannot be undone."</em></p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen19.png" alt="Delete Tenant confirmation dialog with Cancel and Delete buttons" />
+      <figcaption>Figure 16: Delete Tenant confirmation for an inactive tenant</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Button</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Delete</strong></td><td>Permanently removes the tenant and its associated data. The tenant no longer appears in the Inactive Tenants list.</td></tr>
+          <tr><td><strong>Cancel</strong></td><td>Dismisses the dialog. The tenant remains unchanged in the Inactive list.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- ─────────────────────────────────────
+         USER MANAGEMENT
+    ───────────────────────────────────────── -->
+    <div class="gs-module-divider"><span class="gs-module-badge">User Management</span></div>
+    <h3 id="gs-user">User Management</h3>
+    <p>Put the right people in the right roles — onboard users instantly and keep access tightly controlled across every workspace. User Management content will be added here.</p>
+    <div class="callout">
+      <strong>Coming Soon:</strong> The User Management guide will cover creating users, assigning roles, managing access, and deactivating accounts within a tenant workspace.
+    </div>
+
+    <!-- ─────────────────────────────────────
+         APPLICATION MANAGEMENT
+    ───────────────────────────────────────── -->
+    <div class="gs-module-divider"><span class="gs-module-badge">Application Management</span></div>
+    <h3 id="gs-app">Application Management</h3>
+    <p>Bring your applications into QE Next and keep every registration, configuration, and detail organized in one place. Application Management content will be added here.</p>
+    <div class="callout">
+      <strong>Coming Soon:</strong> The Application Management guide will cover registering applications, configuring settings, and linking them to test activities within a tenant workspace.
+    </div>
+
+  </section>
+
+  <!-- ── 3. RBAC ── -->
+  <section id="rbac">
+    <h2>3. Role-Based Access Control</h2>
+    <p>
+      QE Next enforces role-based permissions across all modules. The table below shows
+      the access level each role has on every platform resource. <strong>CRUD</strong> = Create, Read,
+      Update, Delete; <strong>Read</strong> = read-only access; <strong>NA</strong> = no access.
+    </p>
+    <div class="table-wrap">
+      <table class="rbac-table">
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>Super Admin</th>
+            <th>Tenant Admin</th>
+            <th>QA Lead</th>
+            <th>QA / Testers</th>
+            <th>Read Only</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>/tenantadmin</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-na">NA</span></td>
+            <td><span class="perm-na">NA</span></td>
+            <td><span class="perm-na">NA</span></td>
+            <td><span class="perm-na">NA</span></td>
+          </tr>
+          <tr>
+            <td>/user</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-na">NA</span></td>
+            <td><span class="perm-na">NA</span></td>
+          </tr>
+          <tr>
+            <td>/application</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/settings</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/configurations</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/requirements</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/testanalysis</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/optimization</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/testgeneration</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/testautomation</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/defectanalytics</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/dashboard</td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-crud">CRUD</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+          <tr>
+            <td>/workflowtracker</td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+            <td><span class="perm-read">Read</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rbac-note">
+      <strong>CRUD</strong> &mdash; Full Create, Read, Update, and Delete access &nbsp;|&nbsp;
+      <strong>Read</strong> &mdash; View-only access, no modifications &nbsp;|&nbsp;
+      <strong>NA</strong> &mdash; No access; resource is not visible to this role
+    </p>
+  </section>
+
+  <div class="footer">Made with IBM Bob &nbsp;&mdash;&nbsp; QE Next Platform &nbsp;&mdash;&nbsp; Administration User Guide</div>
+
+</div>
+</body>
+</html>
