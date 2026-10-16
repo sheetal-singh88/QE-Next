@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>QE Next – Tenant Management User Guide</title>
+<title>QE Next – Administration User Guide</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -228,11 +228,11 @@
   .ws.active { background: #3b82d4; color: #fff; }
   .ws.done  { background: #f0fdf4; color: #16a34a; }
 
-  /* Tables */
   /* Screenshots */
-  figure.screenshot { margin: 12px 0 16px; }
+  figure.screenshot { margin: 12px auto 16px; max-width: 85%; }
   figure.screenshot img {
     display: block;
+    margin: 0 auto;
     max-width: 100%;
     height: auto;
     border: 1px solid #e5e7eb;
@@ -245,6 +245,7 @@
     margin-top: 6px;
   }
 
+  /* Tables */
   .table-wrap { overflow-x: auto; margin-bottom: 14px; }
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
   thead tr { background: #f7f8fa; }
@@ -365,7 +366,7 @@
     margin: 0;
   }
 
-  /* Sub-section divider inside Getting Started */
+  /* Sub-section divider */
   .gs-module-divider {
     display: flex;
     align-items: center;
@@ -424,22 +425,34 @@
 
   <div class="nav-section-label">Sections</div>
 
-  <a href="#overview"          class="nav-item h2-link"> Overview</a>
+  <a href="#overview"          class="nav-item h2-link">Overview</a>
 
   <a href="#gs-tenant"         class="nav-item h2-link">1. Tenant Management</a>
-
-    <a href="#landing"           class="nav-item h4-link">1.1 Tenant Administration Landing Page</a>
+    <a href="#landing"           class="nav-item h4-link">1.1 Landing Page</a>
     <a href="#create"            class="nav-item h4-link">1.2 Creating a New Tenant</a>
     <a href="#edit"              class="nav-item h4-link">1.3 Editing an Existing Tenant</a>
     <a href="#delete"            class="nav-item h4-link">1.4 Deleting a Tenant</a>
-    <a href="#search"            class="nav-item h4-link">1.5 Searching and Filtering Tenants</a>
+    <a href="#search"            class="nav-item h4-link">1.5 Searching and Filtering</a>
     <a href="#inactive"          class="nav-item h4-link">1.6 Managing Inactive Tenants</a>
-    
-    <a href="#gs-user"           class="nav-item h3-link">User Management</a>
 
-    <a href="#gs-app"            class="nav-item h3-link">Application Management</a>
+  <a href="#gs-user"           class="nav-item h2-link">2. User Management</a>
+    <a href="#um-landing"        class="nav-item h4-link">2.1 Landing Page</a>
+    <a href="#um-add"            class="nav-item h4-link">2.2 Adding a New User</a>
+    <a href="#um-edit"           class="nav-item h4-link">2.3 Editing a User</a>
+    <a href="#um-delete"         class="nav-item h4-link">2.4 Deleting a User</a>
+    <a href="#um-search"         class="nav-item h4-link">2.5 Searching and Filtering</a>
+    <a href="#um-fields"         class="nav-item h4-link">2.6 Field Reference</a>
+    <a href="#um-validation"     class="nav-item h4-link">2.7 Validation &amp; Errors</a>
 
-  <a href="#rbac"              class="nav-item h2-link">3. Role-Based Access Control</a>
+  <a href="#gs-app"            class="nav-item h2-link">3. Application Management</a>
+    <a href="#am-landing"        class="nav-item h4-link">3.1 Dashboard Landing Page</a>
+    <a href="#am-create"         class="nav-item h4-link">3.2 Creating an Application</a>
+    <a href="#am-view"           class="nav-item h4-link">3.3 Viewing Application Details</a>
+    <a href="#am-edit"           class="nav-item h4-link">3.4 Editing an Application</a>
+    <a href="#am-gitsync"        class="nav-item h4-link">3.5 Deleting an Application</a>
+    <a href="#am-delete"         class="nav-item h4-link">3.6 Searching &amp; Filtering</a>
+
+  <a href="#rbac"              class="nav-item h2-link">Role-Based Access Control</a>
 </nav>
 
 <!-- ══════════════════════════════════════════
@@ -454,11 +467,10 @@
     <p>QE Next Platform &mdash; Administration Guide &nbsp;|&nbsp; QE Next 2026 Release</p>
   </div>
 
-  <!-- ── 1. Overview ── -->
+  <!-- ── Overview ── -->
   <section id="overview">
     <h2>Overview</h2>
     <p>QE Next is an enterprise-grade Quality Engineering solution built for teams to manage the full software testing lifecycle in one place. It operates on a multi-tenant architecture, where each tenant is an isolated workspace for a distinct organization or team.</p>
-
     <div class="intro-block">
       <div class="intro-card">
         <div class="ic-title">Tenant Management</div>
@@ -476,18 +488,15 @@
   </section>
 
   <!-- ══════════════════════════════════════════
-       GETTING STARTED
+       1. TENANT MANAGEMENT
   ════════════════════════════════════════════ -->
   <section id="getting-started">
     <h2>Getting Started</h2>
 
-    <!-- ─────────────────────────────────────
-         TENANT MANAGEMENT
-    ───────────────────────────────────────── -->
     <div class="gs-module-divider"><span class="gs-module-badge">Tenant Management</span></div>
-	<p></p>
-	<p></p>
-	</p>
+    <p></p>
+    <p></p>
+    </p>
     <h2 id="gs-tenant">1. Tenant Management</h2>
     <p>Tenant Management is the administrative module that enables platform administrators to create and maintain isolated tenant workspaces. Each tenant represents a distinct organization or team with its own users, application registrations, validity, and test data.</p>
 
@@ -513,9 +522,10 @@
     <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>left navigation menu</strong> icon (&#9776;) in the sidebar to expand it.</p></div>
     <div class="step-row"><span class="step-chip">3</span><p>Click <strong>Tenant Management</strong> from the navigation menu.</p></div>
     <div class="step-row"><span class="step-chip">4</span><p>The <strong>Tenant Administration</strong> landing page loads at <code>/tenant</code>.</p></div>
-<div class="callout">
+    <div class="callout">
       <strong>Note:</strong> When a <strong>Super Admin</strong> user logs in, Tenant Management page is the landing page.
     </div>
+
     <!-- 1.1 Tenant Administration Landing Page -->
     <h3 id="landing">1.1 Tenant Administration Landing Page</h3>
     <p>The landing page lists all tenant records and provides key controls for administration.</p>
@@ -540,17 +550,18 @@
     <h4 id="landing-switching">Switching Views</h4>
     <p>Click the <strong>Active Tenants</strong> tab to view current subscriptions. Click <strong>Inactive Tenants</strong> to view expired or suspended accounts. Search operates within the currently selected tab only.</p>
 
-    <!-- Creating a Tenant -->
+    <!-- 1.2 Creating a New Tenant -->
     <h3 id="create">1.2 Creating a New Tenant</h3>
     <p>Creating a tenant follows below steps:</p>
     <h4 id="create-dialog">Opening the Create Tenant Dialog</h4>
     <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>Tenant Administration</strong> landing page.</p></div>
     <div class="step-row"><span class="step-chip">2</span><p>Click <strong>"Create Tenant +"</strong> in the top-right area of the page.</p></div>
     <div class="step-row"><span class="step-chip">3</span><p>The <strong>Create Tenant</strong> dialog opens on the <strong>General</strong> tab.</p></div>
-<figure class="screenshot">
+    <figure class="screenshot">
       <img src="Screenshots/Screen2.png" alt="Create Tenant Page" />
       <figcaption>Figure 2: Create Tenant page</figcaption>
     </figure>
+
     <h4 id="create-general">General Details Step</h4>
     <div class="table-wrap">
       <table>
@@ -581,18 +592,16 @@
     <p>A <strong>Tenant Owner</strong> manages the tenant workspace. At least one owner must be assigned before a tenant can be created.</p>
 
     <h4 id="owners-existing">Adding an Existing Platform User</h4>
-	
-	   <div class="step-row"><span class="step-chip">1</span><p>In the <strong>Tenant Owners</strong> section, click <strong>"Add User +"</strong>.</p></div>
-	<figure class="screenshot">
+    <div class="step-row"><span class="step-chip">1</span><p>In the <strong>Tenant Owners</strong> section, click <strong>"Add User +"</strong>.</p></div>
+    <figure class="screenshot">
       <img src="Screenshots/Screen3.png" alt="Add an Existing User" />
       <figcaption>Figure 3: Add an Existing User</figcaption>
     </figure>
- 
     <div class="step-row"><span class="step-chip">2</span><p>The <strong>Add User</strong> sub-dialog opens, listing all registered users with Username and Email columns.</p></div>
     <div class="step-row"><span class="step-chip">3</span><p>Use the <strong>search bar (&#128269;)</strong> inside the dialog to filter users by name or email.</p></div>
     <div class="step-row"><span class="step-chip">4</span><p>Select one or more users by checking the checkbox on each row. Selected users appear as chips (default: <em>"No users selected"</em>).</p></div>
-		<figure class="screenshot">
-      <img src="Screenshots/Screen4.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen4.png" alt="Selected an Existing User" />
       <figcaption>Figure 4: Selected an Existing User</figcaption>
     </figure>
     <div class="step-row"><span class="step-chip">5</span><p>Click <strong>"Add"</strong> to confirm. Selected users appear in the Tenant Owners section with a remove (&#215;) control each.</p></div>
@@ -607,10 +616,10 @@
     <div class="step-row"><span class="step-chip">1</span><p>Inside the <strong>Add Tenant Owner</strong> sub-dialog, click <strong>"Create User +"</strong>.</p></div>
     <div class="step-row"><span class="step-chip">2</span><p>The <strong>Create User</strong> form appears. Fill in the required fields:</p></div>
     <div class="table-wrap">
-	<figure class="screenshot">
-      <img src="Screenshots/Screen5.png" alt="Add an Existing User" />
-      <figcaption>Figure 4: Create a new Tenant Owner</figcaption>
-    </figure>
+      <figure class="screenshot">
+        <img src="Screenshots/Screen5.png" alt="Create a new Tenant Owner" />
+        <figcaption>Figure 4: Create a new Tenant Owner</figcaption>
+      </figure>
       <table>
         <thead><tr><th>Field</th><th>Required</th><th>Validation</th></tr></thead>
         <tbody>
@@ -629,10 +638,10 @@
     <!-- License Activation -->
     <h4 id="license">License Activation Step (Optional)</h4>
     <p>After completing the General step, the wizard advances to <strong>License Activation &ndash; Optional</strong>. The General step header displays a checkmark (&#10003;) confirming it is complete.</p>
-	<figure class="screenshot">
-      <img src="Screenshots/Screen7.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen7.png" alt="License Activation (Optional)" />
       <figcaption>Figure 5: License Activation (Optional)</figcaption>
-    </figure>    
+    </figure>
     <ul class="body-list">
       <li>This step is <strong>not mandatory</strong>. Currently its not available so user can proceed without activating a license.</li>
       <li>Click <strong>"Back"</strong> to return to the General tab &mdash; all previously entered data is retained.</li>
@@ -642,22 +651,21 @@
       The dialog closes automatically and the new tenant appears in the <strong>Active Tenants</strong> list. Use the search bar to locate it by name.
     </div>
 
-    <!-- Edit -->
+    <!-- 1.3 Edit -->
     <h3 id="edit">1.3 Editing an Existing Tenant</h3>
     <p>Update a tenant's validity date or owners at any time.</p>
     <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>Tenant Administration</strong> landing page.</p></div>
     <div class="step-row"><span class="step-chip">2</span><p>Use the <strong>search bar</strong> to locate the tenant you want to edit.</p></div>
     <div class="step-row"><span class="step-chip">3</span><p>Click the <strong>Actions (&#8942;)</strong> icon on the tenant's row.</p></div>
-	<figure class="screenshot">
-      <img src="Screenshots/Screen8.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen8.png" alt="Search a Tenant and Click on Actions to Edit" />
       <figcaption>Figure 6: Search a Tenant and Click on Actions to Edit</figcaption>
-    </figure>  	
+    </figure>
     <div class="step-row"><span class="step-chip">4</span><p>Select <strong>"Edit"</strong>. The <strong>Edit Tenant</strong> dialog opens (same two-step structure as Create).</p></div>
-	<figure class="screenshot">
-      <img src="Screenshots/Screen9.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen9.png" alt="Edit Tenant Page" />
       <figcaption>Figure 7.1: Edit Tenant Page</figcaption>
-    </figure> 
-	
+    </figure>
     <div class="step-row"><span class="step-chip">5</span><p>On the <strong>General tab</strong>, make the required changes:</p></div>
     <ul class="body-list" style="margin-left:30px;">
       <li>Update <strong>Active Till</strong> date via the calendar picker.</li>
@@ -665,29 +673,29 @@
       <li>Remove an existing owner by clicking <strong>&#215;</strong> next to their name.</li>
     </ul>
     <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Next"</strong> to proceed to the License Activation step.</p></div>
-	<figure class="screenshot">
-      <img src="Screenshots/Screen10.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen10.png" alt="Edit Tenant Page step 2" />
       <figcaption>Figure 7.2: Edit Tenant Page</figcaption>
-    </figure> 
+    </figure>
     <div class="step-row"><span class="step-chip">7</span><p>Click <strong>"Update"</strong> to save changes. Tenant Details will be updated.</p></div>
 
-    <!-- Delete -->
+    <!-- 1.4 Delete -->
     <h3 id="delete">1.4 Deleting a Tenant</h3>
     <div class="callout warn">
-      <strong>&#9888; Warning:</strong> Deleting a tenant is <strong>permanent and irreversible</strong>. All associated users, application , and test data will be permanently removed from the platform.
+      <strong>&#9888; Warning:</strong> Deleting a tenant is <strong>permanent and irreversible</strong>. All associated users, application, and test data will be permanently removed from the platform.
     </div>
-	<figure class="screenshot">
-      <img src="Screenshots/Screen11.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen11.png" alt="Search a Tenant and Click on Actions to Delete" />
       <figcaption>Figure 8: Search a Tenant and Click on Actions to Delete</figcaption>
-    </figure> 
+    </figure>
     <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>Tenant Administration</strong> landing page.</p></div>
     <div class="step-row"><span class="step-chip">2</span><p>Use the <strong>search bar</strong> to locate the target tenant.</p></div>
     <div class="step-row"><span class="step-chip">3</span><p>Click the <strong>Actions (&#8942;)</strong> icon on the tenant's row.</p></div>
     <div class="step-row"><span class="step-chip">4</span><p>Select <strong>"Delete"</strong>. A confirmation dialog appears: <em>"Are you sure you want to delete [Tenant Name]?"</em></p></div>
-	<figure class="screenshot">
-      <img src="Screenshots/Screen12.png" alt="Add an Existing User" />
+    <figure class="screenshot">
+      <img src="Screenshots/Screen12.png" alt="Delete Tenant Confirmation Dialog Box" />
       <figcaption>Figure 9: Delete Tenant Confirmation Dialog Box</figcaption>
-    </figure> 
+    </figure>
     <div class="table-wrap" style="margin-top:10px;">
       <table>
         <thead><tr><th>Button</th><th>Outcome</th></tr></thead>
@@ -698,7 +706,7 @@
       </table>
     </div>
 
-    <!-- Search -->
+    <!-- 1.5 Search -->
     <h3 id="search">1.5 Searching and Filtering Tenants</h3>
     <div class="step-row"><span class="step-chip">1</span><p>Click the <strong>&#128269; search icon</strong> to activate the search input field.</p></div>
     <div class="step-row"><span class="step-chip">2</span><p>Type a tenant name or partial name. The list filters in real time.</p></div>
@@ -707,9 +715,9 @@
       <strong>Note:</strong> Search is scoped to the currently active tab (Active or Inactive). Switch tabs to search within inactive tenants.
     </div>
 
-    <!-- Inactive Tenants -->
+    <!-- 1.6 Inactive Tenants -->
     <h3 id="inactive">1.6 Managing Inactive Tenants</h3>
-    <p>A tenant becomes <strong>inactive</strong> once its <strong>Active Till</strong> date has passed. Inactive tenants are listed on the <strong>Inactive Tenants</strong> tab and work the same way as active tenants: a <strong>Super Admin</strong> can search for them, edit them, or delete them. Editing lets you extend the validity date to make a tenant active again, and you can add or remove its owners at the same time.</p>
+    <p>A tenant becomes <strong>inactive</strong> once its <strong>Active Till</strong> date has passed. Inactive tenants are listed on the <strong>Inactive Tenants</strong> tab and can be modified the same way as active tenants: a <strong>Super Admin</strong> can search for them, edit them, or delete them. Editing lets you extend the validity date to make a tenant active again, and you can add or remove its owners at the same time.</p>
 
     <h4 id="inactive-view">Viewing Inactive Tenants</h4>
     <div class="step-row"><span class="step-chip">1</span><p>Open the <strong>Tenant Administration</strong> landing page.</p></div>
@@ -739,10 +747,6 @@
       <figcaption>Figure 13: Selecting a new Active Till date</figcaption>
     </figure>
     <div class="step-row"><span class="step-chip">5</span><p>Review the <strong>Tenant Owners</strong> list and update it if needed (see below).</p></div>
-    <figure class="screenshot">
-      <img src="Screenshots/Screen17.png" alt="Edit Tenant dialog with a new Active Till date entered and the existing owner listed" />
-      <figcaption>Figure 14: New Active Till date entered</figcaption>
-    </figure>
     <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Next"</strong> to go to the optional License Activation step, then click <strong>"Update"</strong> to save. The tenant moves from the <strong>Inactive Tenants</strong> tab to the <strong>Active Tenants</strong> tab.</p></div>
 
     <h4 id="inactive-owners">Adding or Removing Tenant Owners</h4>
@@ -779,32 +783,348 @@
       </table>
     </div>
 
-
-    <!-- ─────────────────────────────────────
-         USER MANAGEMENT
-    ───────────────────────────────────────── -->
+    <!-- ══════════════════════════════════════════
+         2. USER MANAGEMENT
+    ════════════════════════════════════════════ -->
     <div class="gs-module-divider"><span class="gs-module-badge">User Management</span></div>
-    <h3 id="gs-user">User Management</h3>
-    <p>Put the right people in the right roles — onboard users instantly and keep access tightly controlled across every workspace. User Management content will be added here.</p>
+    <p></p>
+    <h2 id="gs-user">2. User Management</h2>
+    <p>User Management enables Tenant Administrators to onboard platform users, assign roles, control application access, and revoke accounts within a tenant workspace.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>View Users</strong></td><td>Browse active and inactive user accounts with their roles, application access, and validity dates.</td></tr>
+          <tr><td><strong>Add User</strong></td><td>Provision a new platform user with an assigned role and application scope.</td></tr>
+          <tr><td><strong>Edit User</strong></td><td>Update a user's role, application access, and password.</td></tr>
+          <tr><td><strong>Delete User</strong></td><td>Permanently revoke a user's access and remove their record from the platform.</td></tr>
+          <tr><td><strong>Search &amp; Filter</strong></td><td>Dynamically filter the user list by User ID or email address.</td></tr>
+        </tbody>
+      </table>
+    </div>
     <div class="callout">
-      <strong>Coming Soon:</strong> The User Management guide will cover creating users, assigning roles, managing access, and deactivating accounts within a tenant workspace.
+      <strong>Role Required:</strong> <strong>Super Admin</strong> and <strong>Tenant Admin</strong> have full CRUD access to User Management. <strong>QA Lead</strong> has read-only access. <strong>QA / Testers</strong> and <strong>Read Only</strong> roles have no access.
     </div>
 
-    <!-- ─────────────────────────────────────
-         APPLICATION MANAGEMENT
-    ───────────────────────────────────────── -->
-    <div class="gs-module-divider"><span class="gs-module-badge">Application Management</span></div>
-    <h3 id="gs-app">Application Management</h3>
-    <p>Bring your applications into QE Next and keep every registration, configuration, and detail organized in one place. Application Management content will be added here.</p>
-    <div class="callout">
-      <strong>Coming Soon:</strong> The Application Management guide will cover registering applications, configuring settings, and linking them to test activities within a tenant workspace.
+    <h4 id="um-navigation">Navigating to User Management</h4>
+    <div class="step-row"><span class="step-chip">1</span><p>Log in to QE Next using your credentials.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>left navigation menu</strong> icon (&#9776;) in the sidebar.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Click <strong>User Management</strong> from the navigation menu.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen20.png" alt="Clicking User Management in the left navigation menu" />
+      <figcaption>Figure 17: Navigating to User Management from the left sidebar</figcaption>
+    </figure>
+
+    <!-- 2.1 Landing Page -->
+    <h3 id="um-landing">2.1 User Management Landing Page</h3>
+    <p>The landing page lists all users within the tenant workspace with their assigned roles, application access, and key timestamps.</p>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen21.png" alt="User Management landing page showing Active Users tab, user table with User ID, Email, Role, Valid Till, Added On, Application Access and Actions columns" />
+      <figcaption>Figure 18: User Management landing page — Active Users list</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>UI Element</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Active Users tab</strong></td><td>Default view. Lists all currently authorized users with valid access. Shows total count, e.g. <em>Active Users (11)</em>.</td></tr>
+          <tr><td><strong>Inactive Users tab</strong></td><td>Lists deactivated or expired user accounts.</td></tr>
+          <tr><td><strong>Add Users button</strong></td><td>Opens the Add User modal dialog to provision a new user.</td></tr>
+          <tr><td><strong>Search field (&#128269;)</strong></td><td>Filters the user table dynamically by User ID or email as the user types.</td></tr>
+          <tr><td><strong>User ID</strong></td><td>Unique identifier for the user, auto-extracted from their email prefix.</td></tr>
+          <tr><td><strong>Email</strong></td><td>The user's registered email address.</td></tr>
+          <tr><td><strong>Role</strong></td><td>Assigned platform role displayed as a badge: Tenant Admin, QA Lead, QA User, or Read Only.</td></tr>
+          <tr><td><strong>Valid Till</strong></td><td>Account expiry date. Shown as <em>N/A</em> if no expiry is set.</td></tr>
+          <tr><td><strong>Added On</strong></td><td>Timestamp when the user was provisioned.</td></tr>
+          <tr><td><strong>Application Access</strong></td><td>Comma-separated list of applications the user can access.</td></tr>
+          <tr><td><strong>Actions (&#8942;)</strong></td><td>Per-row context menu offering Edit and Delete options.</td></tr>
+          <tr><td><strong>Pagination controls</strong></td><td>Items-per-page selector, item count display, and Next/Previous navigation.</td></tr>
+        </tbody>
+      </table>
     </div>
+
+    <!-- 2.2 Adding a User -->
+    <h3 id="um-add">2.2 Adding a New User</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>Navigate to the <strong>User Management</strong> landing page.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>"Add Users +"</strong> button in the top-right area. The <strong>Add User</strong> modal dialog opens.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen22.png" alt="Add User modal dialog showing Email, User ID, Password, Confirm Password, Role and Application Access fields" />
+      <figcaption>Figure 19: Add User modal dialog</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">3</span><p>Enter a valid <strong>Email</strong> address. The <strong>User ID</strong> field is automatically populated from the email prefix.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen23.png" alt="Add User dialog with email testuser55@ignite.com entered and User ID testuser55 auto-populated" />
+      <figcaption>Figure 20: User ID auto-extracted from email prefix</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">4</span><p>Enter a <strong>Password</strong> that meets the complexity requirements (min. 8 characters, uppercase, lowercase, number, and special character).</p></div>
+    <div class="step-row"><span class="step-chip">5</span><p>Re-enter the same password in the <strong>Confirm Password</strong> field.</p></div>
+    <div class="step-row"><span class="step-chip">6</span><p>Select a <strong>Role</strong> from the dropdown: Tenant Admin, QE Lead, QE, or Read Only.</p></div>
+    <div class="step-row"><span class="step-chip">7</span><p>Click the <strong>Application Access</strong> dropdown to select one or more applications the user is authorized to access.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen24.png" alt="Application Access multi-select dropdown open showing sample and Test Application options" />
+      <figcaption>Figure 21: Selecting Application Access — multi-select dropdown</figcaption>
+    </figure>
+    <div class="callout warn">
+      <strong>Password Mismatch:</strong> If the Confirm Password value does not match the Password field, an inline error <em>"Passwords do not match"</em> is shown and the Add User button remains active but submission will fail validation.
+    </div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen25.png" alt="Add User form showing Passwords do not match validation error in red below Confirm Password field" />
+      <figcaption>Figure 22: Validation error — Passwords do not match</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">8</span><p>Click <strong>"Add User"</strong> to create the account. A green success toast confirms: <em>"User created successfully"</em>. The new user appears in the Active Users table and the count increments.</p></div>
+
+    <div class="step-row"><span class="step-chip">9</span><p>Click <strong>"Cancel"</strong> at any point to dismiss the dialog without saving.</p></div>
+    <div class="callout">
+      <strong>Auto User ID:</strong> The User ID is automatically extracted from the email prefix as soon as a valid email address is typed — no manual entry is required.
+    </div>
+
+    <!-- 2.3 Editing a User -->
+    <h3 id="um-edit">2.3 Editing an Existing User</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>On the <strong>User Management</strong> landing page, use the <strong>search field</strong> to locate the user if needed.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>Actions (&#8942;)</strong> icon on the user's row.</p></div>
+	    <figure class="screenshot">
+      <img src="Screenshots/Screen26.png" alt="User Management landing page showing success toast User created successfully and Active Users count updated to 12" />
+      <figcaption>Figure 23: Actions icon — Edit option</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">3</span><p>Select <strong>"Edit"</strong> from the context menu. The <strong>Edit User</strong> modal opens with all fields pre-populated.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen28.png" alt="Edit User dialog showing User ID disabled with note User ID cannot be changed, pre-filled password, Role set to Tenant Admin, Application Access showing sample" />
+      <figcaption>Figure 24: Edit User dialog — User ID is read-only and cannot be changed</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">4</span><p>Update the required fields — <strong>Password</strong>, <strong>Role</strong>, or <strong>Application Access</strong>.</p></div>
+    <div class="step-row"><span class="step-chip">5</span><p>Click <strong>"Update User"</strong> to save. A success toast confirms the update.</p></div>
+    <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Cancel"</strong> or the close (&#215;) icon to discard all changes.</p></div>
+    <div class="callout">
+      <strong>Note:</strong> The <strong>User ID</strong> field displays <em>"User ID cannot be changed"</em> and is disabled in Edit mode. The password is pre-filled with the current value — type a new password only if you want to change it.
+    </div>
+
+    <!-- 2.4 Deleting a User -->
+    <h3 id="um-delete">2.4 Deleting a User</h3>
+    <div class="callout warn">
+      <strong>&#9888; Warning:</strong> Deleting a user is <strong>permanent</strong>. Their access is immediately revoked and their record is removed from the platform.
+    </div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen30.png" alt="User Management landing page showing success toast User created successfully and Active Users count updated to 12" />
+      <figcaption>Figure 25: Actions icon — Delete option</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">1</span><p>Locate the user in the table and click the <strong>Actions (&#8942;)</strong> icon on their row.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen31.png" alt="User Management landing page showing success toast User created successfully and Active Users count updated to 12" />
+      <figcaption>Figure 26: Delete User Confirmation Dialog Box</figcaption>
+    </figure>	
+    <div class="step-row"><span class="step-chip">2</span><p>Select <strong>"Delete"</strong>. A confirmation dialog appears asking: <em>"Are you sure you want to delete [user]?"</em></p></div>
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <thead><tr><th>Button</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Confirm Delete</strong></td><td>Permanently deletes the user. Success toast: <em>"User deleted successfully"</em>. User is removed from the Active list.</td></tr>
+          <tr><td><strong>Cancel</strong></td><td>Dismisses the dialog. The user remains unchanged in the Active list.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2.5 Searching and Filtering -->
+    <h3 id="um-search">2.5 Searching and Filtering Users</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>Click the <strong>&#128269; search icon</strong> on the User Management landing page to activate the search input.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Type a <strong>User ID</strong> or <strong>email address</strong> (or partial value). The table filters dynamically in real time.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen27.png" alt="User Management search showing testuser typed in search field with one matching result testuser55 displayed and Actions menu open" />
+      <figcaption>Figure 27: Real-time search filtering the user list</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">3</span><p>If no records match, the table shows a <em>"No users found"</em> message with the prompt <em>"Try adjusting your search or filter to find what you are looking for."</em></p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/Screen29.png" alt="User Management page showing No users found message after searching testuser55 with empty table" />
+      <figcaption>Figure 28: No users found — empty search result state</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">4</span><p>Click the <strong>&#10005;</strong> icon in the search bar or clear the field to restore the full user list.</p></div>
+    <div class="callout">
+      <strong>Note:</strong> Search is scoped to the currently active tab. Switch to the <strong>Inactive Users</strong> tab to search within deactivated accounts.
+    </div>
+
+    <!-- 2.6 Field Reference -->
+    <h3 id="um-fields">2.6 Field Reference</h3>
+    <p style="font-weight:600; margin-bottom:6px;">Add User / Edit User Modal</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Mandatory</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Email</strong></td><td>Text input</td><td><span class="req">&#10003; Yes</span></td><td>Valid email format required (e.g. <code>user@domain.com</code>). Inline error shown for invalid format.</td></tr>
+          <tr><td><strong>User ID</strong></td><td>Auto-filled text</td><td><span class="req">&#10003; Yes</span></td><td>Automatically extracted from the email prefix. <strong>Read-only in Edit mode</strong> — displays <em>"User ID cannot be changed"</em>.</td></tr>
+          <tr><td><strong>Password</strong></td><td>Password input</td><td><span class="req">&#10003; Yes</span></td><td>Min. 8 characters; must include uppercase, lowercase, number, and special character. Pre-filled in Edit mode.</td></tr>
+          <tr><td><strong>Confirm Password</strong></td><td>Password input</td><td><span class="req">&#10003; Yes</span></td><td>Must exactly match the Password field. Inline error: <em>"Passwords do not match"</em>.</td></tr>
+          <tr><td><strong>Role</strong></td><td>Dropdown</td><td><span class="req">&#10003; Yes</span></td><td>Options: Tenant Admin, QA Lead, QA User, Read Only. Alert <em>"Please select a role"</em> if submitted blank.</td></tr>
+          <tr><td><strong>Application Access</strong></td><td>Multi-select dropdown</td><td><span class="req">&#10003; Yes</span></td><td>Select one or more registered applications. Displayed as comma-separated names or chips in the user table.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2.7 Validation -->
+    <h3 id="um-validation">2.7 Validation Rules &amp; Error Messages</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Scenario</th><th>Error / Behaviour</th></tr></thead>
+        <tbody>
+          <tr><td>Invalid email format entered</td><td>Inline error shown below the Email field</td></tr>
+          <tr><td>Email or Password left blank on submit</td><td>Inline required error shown on the respective field</td></tr>
+          <tr><td>Password does not meet complexity rules</td><td>Inline error: <em>"Must be at least 8 characters with uppercase, lowercase, number, and special character"</em></td></tr>
+          <tr><td>Confirm Password does not match Password</td><td>Inline error: <em>"Passwords do not match"</em></td></tr>
+          <tr><td>Role dropdown not selected on submit</td><td>Alert dialog: <em>"Please select a role"</em> — must be dismissed before retrying</td></tr>
+          <tr><td>Duplicate email or User ID already exists</td><td>Banner error: <em>"User already exists"</em></td></tr>
+          <tr><td>Search returns no matching records</td><td>Table state: <em>"No users found — Try adjusting your search or filter to find what you are looking for."</em></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         3. APPLICATION MANAGEMENT
+    ════════════════════════════════════════════ -->
+    <div class="gs-module-divider"><span class="gs-module-badge">Application Management</span></div>
+    <p></p>
+    <h2 id="gs-app">3. Application Management</h2>
+    <p>Application Management enables teams to register, configure, and monitor software applications under test. Each application is an isolated project within a tenant workspace, tracked with live quality metrics including test model counts, test case counts, automation coverage percentage, and active alerts.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>View Applications</strong></td><td>Browse all registered applications as metric cards (grid view) or a table (list view).</td></tr>
+          <tr><td><strong>Create Application</strong></td><td>Register a new application with name, description, domain, and automation tool.</td></tr>
+          <tr><td><strong>View Details</strong></td><td>Open the Application Overview page showing full test asset breakdown.</td></tr>
+          <tr><td><strong>Edit Application</strong></td><td>Update description, domain, and automation tool. Application Name is read-only after creation.</td></tr>
+          <tr><td><strong>Git Sync</strong></td><td>Trigger synchronisation with the linked Git repository to pull latest models and assets.</td></tr>
+          <tr><td><strong>Delete Application</strong></td><td>Permanently remove the application and all its associated test models, cases, and automation configurations.</td></tr>
+          <tr><td><strong>Search &amp; Filter</strong></td><td>Filter application cards dynamically by name in real time.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <strong>Role Required:</strong> <strong>Super Admin</strong>, <strong>Tenant Admin</strong>, and <strong>QA Lead</strong> have full CRUD access. <strong>QA / Testers</strong> and <strong>Read Only</strong> roles have read-only access.
+    </div>
+
+    <h4 id="am-navigation">Navigating to Application Management</h4>
+    <div class="step-row"><span class="step-chip">1</span><p>Log in to QE Next using your credentials.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Upon login, the <strong>Applications</strong> is the default landing page at <code>/app-selection</code>.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>Alternatively, click the <strong>Applications</strong> item in the left navigation sidebar at any time to return</p></div>
+    <div class="callout">
+      <strong>Note:</strong> A banner prompt — <em>"Select an application in the header to continue"</em> — is shown until an application is selected from the global header dropdown. Selecting an application unlocks all QE module navigation (Dashboard, Test Analysis, Test Generation, etc.).
+    </div>
+
+    <!-- 3.1 Landing Page -->
+    <h3 id="am-landing">3.1 Applications Landing Page</h3>
+    <p>The Applications landing page displays all registered applications as metric cards, giving an at-a-glance view of quality health across every project.</p>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen1.png" alt="Applications landing page showing registered application cards with Test Models, Test Cases, Automation Coverage and Alerts metrics, Create New Application button, search bar, and grid/list view toggle" />
+      <figcaption>Figure 30: Applications Landing Page — grid view with live metrics per card</figcaption>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>UI Element</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Page Title</strong></td><td>"Applications" — the default landing page after login.</td></tr>
+          <tr><td><strong>Global Header App Selector</strong></td><td>Dropdown in the top header bar. Sets the active workspace context and unlocks full module navigation.</td></tr>
+          <tr><td><strong>Search box (&#128269;)</strong></td><td>Filters application cards dynamically by name as the user types. Displays <em>"No applications found"</em> if no match.</td></tr>
+          <tr><td><strong>Grid View / List View toggle</strong></td><td>Switch between card grid layout (default) and table list layout.</td></tr>
+          <tr><td><strong>Create New Application button</strong></td><td>Opens the Create New Application dialog.</td></tr>
+          <tr><td><strong>Application card</strong></td><td>Shows application name with live metrics: Test Models count, Test Cases count, Automation Coverage %, and Alerts count.</td></tr>
+          <tr><td><strong>View details link</strong></td><td>Opens the Application Overview page with full test asset breakdown for that application.</td></tr>
+          <tr><td><strong>Actions menu (&#8942;)</strong></td><td>Per-card context menu offering <strong>Edit</strong>, <strong>Git Sync</strong>, and <strong>Delete</strong>.</td></tr>
+          <tr><td><strong>Pagination controls</strong></td><td>Items-per-page selector, page indicator, and Next/Previous navigation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3.2 Creating an Application -->
+    <h3 id="am-create">3.2 Creating a New Application</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>On the Applications landing page, click the <strong>"Create New Application"</strong> button.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>The <strong>Create New Application</strong> dialog opens.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen2.png" alt="Create New Application modal dialog showing Application Name, Application Description, Domain and Automation Tool fields with Cancel and Create buttons" />
+      <figcaption>Figure 31: Create New Application dialog</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">3</span><p>Enter a unique <strong>Application Name</strong>. This field is mandatory and cannot be changed after creation.</p></div>
+    <div class="step-row"><span class="step-chip">4</span><p>Enter <strong>Application Description</strong>.</p></div>
+    <div class="step-row"><span class="step-chip">5</span><p>Select or type a <strong>Domain</strong>. Choose from the existing dropdown list, or type a new custom domain name directly into the field — it will be registered and selected automatically.</p></div>
+    <div class="step-row"><span class="step-chip">7</span><p>Click <strong>"Create"</strong> to submit. A success toast confirms: <em>"Application created successfully"</em>. The dialog closes and the new application card appears on the applications page with metrics initialised at zero.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen3.png" alt="Applications dashboard after successful creation showing new application card with 0 Test Models, 0 Test Cases, 0% Automation Coverage and success toast" />
+      <figcaption>Figure 32: New application card after successful creation</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">8</span><p>Click <strong>"Cancel"</strong> at any point to dismiss the dialog without saving.</p></div>
+    <div class="callout">
+      <strong>Custom Domain on-the-fly:</strong> Type a brand-new domain name directly into the Domain field — it will be registered automatically and available for future applications.
+    </div>
+
+    <!-- 3.3 View Details -->
+    <h3 id="am-view">3.3 Viewing Application Details</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>On the Applications landing page, locate the application card you want to inspect.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Click the <strong>"View details"</strong> link on the card.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>The <strong>Application Overview</strong> page opens, showing the full test model inventory, linked test case numbers, automation coverage, and associated configurations.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen4.png" alt="Application Overview page showing test model inventory, test case count, automation coverage, Edit Application and Delete Application buttons, and Select Application option" />
+      <figcaption>Figure 33: Application Overview page</figcaption>
+    </figure>
+    <div class="callout">
+      <strong>Select Application:</strong> If this application is not the currently active workspace, click <strong>"Select Application"</strong> on the Overview page to set it as the active context in the global header.
+    </div>
+
+    <!-- 3.4 Editing an Application -->
+    <h3 id="am-edit">3.4 Editing an Application</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>On the Applications landing page, click either the <strong>Actions (&#8942;)</strong> icon on the selected application in Table view or on the <strong>Edit Application</strong> option displayed on Application Overview page.</p></div>
+	<figure class="screenshot">
+      <img src="Screenshots/AppScreen5.png" alt="Application card Actions menu open showing Edit, Git Sync and Delete options" />
+      <figcaption>Figure 34: Application card — Actions menu with Edit and Delete option</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">2</span><p>Select <strong>"Edit"</strong> from the context menu.</p></div>
+     <div class="step-row"><span class="step-chip">3</span><p>The <strong>Edit Application</strong> dialog opens. The <strong>Application Name</strong> field is disabled and read-only.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen6.png" alt="Edit Application dialog showing Application Name field disabled with lock icon, editable Description, Domain and Automation Tool fields, and Cancel and Update buttons" />
+      <figcaption>Figure 35: Edit Application dialog — Application Name is read-only</figcaption>
+    </figure>
+    <div class="step-row"><span class="step-chip">4</span><p>Update the <strong>Application Description</strong>, <strong>Domain</strong> as required.</p></div>
+    <div class="step-row"><span class="step-chip">5</span><p>Click <strong>"Update"</strong> to save. A success toast confirms: <em>"Application updated successfully"</em>.</p></div>
+    <div class="step-row"><span class="step-chip">6</span><p>Click <strong>"Cancel"</strong> to discard all pending changes and close the dialog.</p></div>
+    <div class="callout">
+      <strong>Note:</strong> The <strong>Application Name cannot be changed</strong> after creation — the field is permanently disabled in Edit mode. Only Description, Domain, and Automation Tool are editable.
+    </div>
+
+    <!-- 3.5 Deleting an Application -->
+    <h3 id="am-delete">3.5 Deleting an Application</h3>
+    <div class="callout warn">
+      <strong>&#9888; Warning:</strong> Deleting an application is <strong>permanent and irreversible</strong>. All associated test models, test cases, and automation configurations will be permanently removed.
+    </div>
+    <div class="step-row"><span class="step-chip">1</span><p>On the Applications landing page, click either the <strong>Actions (&#8942;)</strong> icon on the selected application in Table view or on the <strong>Edit Application</strong> option displayed on Application Overview page.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen7.png" alt="Delete Application confirmation dialog showing warning message Are you sure you want to delete application with Cancel and Confirm Delete buttons" />
+      <figcaption>Figure 36: Actions menu with Delete Option</figcaption>
+    </figure>	
+    <div class="step-row"><span class="step-chip">2</span><p>Select <strong>"Delete"</strong>. A confirmation dialog appears with the title <strong>"Delete Application"</strong>.</p></div>
+    <figure class="screenshot">
+      <img src="Screenshots/AppScreen8.png" alt="Delete Application confirmation dialog showing warning message Are you sure you want to delete application with Cancel and Confirm Delete buttons" />
+      <figcaption>Figure 37: Delete Application confirmation dialog</figcaption>
+    </figure>
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <thead><tr><th>Button</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Confirm Delete</strong></td><td>Permanently removes the application and all associated test models, test cases, and automation configurations. Success toast: <em>"Application deleted successfully"</em>. Card is removed from the landing page.</td></tr>
+          <tr><td><strong>Cancel</strong></td><td>Dismisses the dialog. The application remains unchanged on the landing page.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3.6 Searching and Filtering -->
+    <h3 id="am-search">3.6 Searching and Filtering Applications</h3>
+    <div class="step-row"><span class="step-chip">1</span><p>On the Applications landing page, click inside the <strong>&#128269; search box</strong>.</p></div>
+    <div class="step-row"><span class="step-chip">2</span><p>Type an application name or partial name. Application cards filter dynamically in real time.</p></div>
+    <div class="step-row"><span class="step-chip">3</span><p>If no application matches, the landing page shows: <em>"No applications found"</em>.</p></div>
+    <div class="step-row"><span class="step-chip">4</span><p>Clear the search field to restore the full application landing page.</p></div>
+
 
   </section>
 
-  <!-- ── 3. RBAC ── -->
+  <!-- ── RBAC ── -->
   <section id="rbac">
-    <h2>3. Role-Based Access Control</h2>
+    <h2>Role-Based Access Control</h2>
     <p>
       QE Next enforces role-based permissions across all modules. The table below shows
       the access level each role has on every platform resource. <strong>CRUD</strong> = Create, Read,
